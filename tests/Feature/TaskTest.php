@@ -12,7 +12,7 @@ class TaskTest extends TestCase
     /**
      * @test
      */
-    public function 一覧を取得()
+    public function 一覧取得テスト()
     {
         $tasks = Task::factory()->count(10)->create();
 
@@ -20,5 +20,21 @@ class TaskTest extends TestCase
 
         $response->assertOk()
             ->assertJsonCount($tasks->count());
+    }
+
+    /**
+     * @test
+     */
+    public function 登録テスト()
+    {
+
+        $data = [
+            "title" => 'テスト投稿'
+        ];
+
+        $response = $this->postJson('api/tasks', $data);
+
+        $response->assertCreated()
+            ->assertJsonFragment($data);
     }
 }
