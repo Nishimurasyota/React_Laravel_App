@@ -37,4 +37,39 @@ class TaskTest extends TestCase
         $response->assertCreated()
             ->assertJsonFragment($data);
     }
+
+    /**
+     * @test
+     */
+    public function 更新テスト()
+    {
+
+        $task = Task::factory()->create();
+
+        $task->title = "更新";
+
+        $response = $this->patchJson("api/tasks/{$task->id}", $task->toArray());
+
+        $response->assertOk()
+            ->assertJsonFragment($task->toArray());
+    }
+
+    /**
+     * @test
+     */
+    public function 削除テスト()
+    {
+
+        $task = Task::factory()->count(10)->create();
+
+
+        $response = $this->deleteJson('api/tasks/2');
+        $response->assertOk();
+
+        $response = $this->getJson('api/tasks');
+        $response->assertJsonCount($task->count() - 1);
+
+        // $response->assertOk()
+        //     ->assertJsonFragment($task->toArray());
+    }
 }
