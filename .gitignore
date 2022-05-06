@@ -13,3 +13,5 @@ yarn-error.log
 /.idea
 /.vscode
 database/database.sqlite
+_ide_helper_models.pnp
+_ide_helper.php
