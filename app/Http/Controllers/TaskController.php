@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use Illuminate\Http\Request;
 use App\Models\Task;
 
@@ -17,12 +19,12 @@ class TaskController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param StoreTaskRequest $request
      * @return \Illuminate\Http\JsonResponse
      * @
      */
 
-    public function store(Request $request)
+    public function store(StoreTaskRequest $request)
     {
 
 
@@ -50,7 +52,7 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Task $task)
+    public function update(UpdateTaskRequest $request, Task $task)
     {
         $update = [
             "title" => $request->title
