@@ -1,5 +1,7 @@
 import React from "react"
-import {UseTasks} from "../../queries/TaskQuery"
+import {UseTasks} from "../../../queries/TaskQuery"
+import {TaskItem} from "../components/taskItem"
+
 
 export const TaskList:React.FC = () => {
     const {data:tasks, status} = UseTasks();

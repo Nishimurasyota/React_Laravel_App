@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from "react";
-import {TaskInput} from "../tasks/taskInput"
-import {TaskList} from "../tasks/taskList"
+import {TaskInput} from "./components/taskInput"
+import {TaskList} from "./components/taskList"
 export const TaskPage: React.FC = () => {
 
     // const [tasks,setTasks] = useState<Task[]>([]);

@@ -2556,53 +2556,10 @@ exports.LoginPage = LoginPage;
 
 /***/ }),
 
-/***/ "./resources/ts/pages/tasks/index.tsx":
-/*!********************************************!*\
-  !*** ./resources/ts/pages/tasks/index.tsx ***!
-  \********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports.TaskPage = void 0;
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var taskInput_1 = __webpack_require__(/*! ../tasks/taskInput */ "./resources/ts/pages/tasks/taskInput.tsx");
-
-var taskList_1 = __webpack_require__(/*! ../tasks/taskList */ "./resources/ts/pages/tasks/taskList.tsx");
-
-var TaskPage = function TaskPage() {
-  // const [tasks,setTasks] = useState<Task[]>([]);
-  // const getTasks = async () => {
-  //     const datas = await axios.get<Task[]>("api/tasks")
-  //     const {data} = datas
-  //     setTasks(data);
-  // }
-  // useEffect(()=>{
-  //     getTasks();
-  // })
-  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(taskInput_1.TaskInput, null), react_1["default"].createElement(taskList_1.TaskList, null));
-};
-
-exports.TaskPage = TaskPage;
-
-/***/ }),
-
-/***/ "./resources/ts/pages/tasks/taskInput.tsx":
-/*!************************************************!*\
-  !*** ./resources/ts/pages/tasks/taskInput.tsx ***!
-  \************************************************/
+/***/ "./resources/ts/pages/tasks/components/taskInput.tsx":
+/*!***********************************************************!*\
+  !*** ./resources/ts/pages/tasks/components/taskInput.tsx ***!
+  \***********************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -2640,10 +2597,10 @@ exports.TaskInput = TaskInput;
 
 /***/ }),
 
-/***/ "./resources/ts/pages/tasks/taskList.tsx":
-/*!***********************************************!*\
-  !*** ./resources/ts/pages/tasks/taskList.tsx ***!
-  \***********************************************/
+/***/ "./resources/ts/pages/tasks/components/taskList.tsx":
+/*!**********************************************************!*\
+  !*** ./resources/ts/pages/tasks/components/taskList.tsx ***!
+  \**********************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -2662,7 +2619,7 @@ exports.TaskList = void 0;
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var TaskQuery_1 = __webpack_require__(/*! ../../queries/TaskQuery */ "./resources/ts/queries/TaskQuery.tsx");
+var TaskQuery_1 = __webpack_require__(/*! ../../../queries/TaskQuery */ "./resources/ts/queries/TaskQuery.tsx");
 
 var TaskList = function TaskList() {
   var _a = (0, TaskQuery_1.UseTasks)(),
@@ -2736,6 +2693,49 @@ var TaskList = function TaskList() {
 };
 
 exports.TaskList = TaskList;
+
+/***/ }),
+
+/***/ "./resources/ts/pages/tasks/index.tsx":
+/*!********************************************!*\
+  !*** ./resources/ts/pages/tasks/index.tsx ***!
+  \********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.TaskPage = void 0;
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var taskInput_1 = __webpack_require__(/*! ./components/taskInput */ "./resources/ts/pages/tasks/components/taskInput.tsx");
+
+var taskList_1 = __webpack_require__(/*! ./components/taskList */ "./resources/ts/pages/tasks/components/taskList.tsx");
+
+var TaskPage = function TaskPage() {
+  // const [tasks,setTasks] = useState<Task[]>([]);
+  // const getTasks = async () => {
+  //     const datas = await axios.get<Task[]>("api/tasks")
+  //     const {data} = datas
+  //     setTasks(data);
+  // }
+  // useEffect(()=>{
+  //     getTasks();
+  // })
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(taskInput_1.TaskInput, null), react_1["default"].createElement(taskList_1.TaskList, null));
+};
+
+exports.TaskPage = TaskPage;
 
 /***/ }),
 
