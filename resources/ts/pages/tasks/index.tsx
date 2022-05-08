@@ -1,14 +1,8 @@
 import React,{useEffect, useState} from "react";
 import axios from "axios";
 import {useQuery} from "react-query";
+import {Task} from "../../types/Task"
 
-type Task = {
-    id: number,
-    title: string,
-    is_done:boolean,
-    created_at: Date,
-    updated_at: Date,
-}
 
 export const TaskPage: React.VFC = () => {
 
