@@ -73,4 +73,11 @@ class TaskController extends Controller
     {
         return $task->delete() ? response()->json($task) : response()->json([], 500);
     }
+
+    public function updateDone(Task $task, Request $request)
+    {
+        $task->is_done = $request->is_done;
+
+        return $task->update() ? response()->json($task) : response()->json([], 500);
+    }
 }
