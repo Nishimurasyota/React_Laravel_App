@@ -1,4 +1,4 @@
-import {getTasks, updateDoneTask} from "../api/TaskApi"
+import {getTasks, updateDoneTask, createTask} from "../api/TaskApi"
 import {useQuery,useMutation,useQueryClient} from "react-query";
 import {toast} from "react-toastify"
 
@@ -16,3 +16,14 @@ return useMutation(updateDoneTask,{
     onError: () => { toast.error("更新に失敗しました")}
 })
 }
+
+export const UseCreateTask = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation(createTask,{
+        onSuccess: () => {
+            queryClient.invalidateQueries("tasks")
+            toast.success("登録に成功しました")},
+        onError: () => { toast.error("登録に失敗しました")}
+    })
+    }
