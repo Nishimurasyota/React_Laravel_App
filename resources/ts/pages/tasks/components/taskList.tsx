@@ -1,10 +1,13 @@
 import React from "react"
 import {UseTasks} from "../../../queries/TaskQuery"
-import {TaskItem} from "../components/taskItem"
-
+import {TaskItem} from "./taskItem"
+import {UseUpdateDoneTasks} from "../../../queries/TaskQuery"
 
 export const TaskList:React.FC = () => {
+
     const {data:tasks, status} = UseTasks();
+
+    const updateDoneTasks = UseUpdateDoneTasks();
 
     if(status === "loading"){
         return <div className="loader" />
@@ -18,9 +21,9 @@ export const TaskList:React.FC = () => {
             <div className="inner">
                 <ul className="task-list">
                     {tasks.map(task => (
-                    <li key={task.id}>
+                    <li  className={task.is_done ? "done" : ""} key={task.id}>
                         <label className="checkbox-label">
-                            <input type="checkbox" className="checkbox-input" />
+                            <input type="checkbox" className="checkbox-input" onClick={() => updateDoneTasks.mutate(task)} />
                         </label>
                         <div><span>{task.title}</span></div>
                         <button className="btn is-delete">削除</button>

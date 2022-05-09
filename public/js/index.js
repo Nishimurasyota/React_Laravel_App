@@ -2372,7 +2372,7 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.getTasks = void 0;
+exports.updateDoneTask = exports.getTasks = void 0;
 
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
@@ -2397,6 +2397,32 @@ var getTasks = function getTasks() {
 };
 
 exports.getTasks = getTasks;
+
+var updateDoneTask = function updateDoneTask(_a) {
+  var id = _a.id,
+      is_done = _a.is_done;
+  return __awaiter(void 0, void 0, void 0, function () {
+    var data;
+    return __generator(this, function (_b) {
+      switch (_b.label) {
+        case 0:
+          return [4
+          /*yield*/
+          , axios_1["default"].patch("api/tasks/update-done/".concat(id), {
+            is_done: !is_done
+          })];
+
+        case 1:
+          data = _b.sent().data;
+          return [2
+          /*return*/
+          , data];
+      }
+    });
+  });
+};
+
+exports.updateDoneTask = updateDoneTask;
 
 /***/ }),
 
@@ -2621,10 +2647,14 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 
 var TaskQuery_1 = __webpack_require__(/*! ../../../queries/TaskQuery */ "./resources/ts/queries/TaskQuery.tsx");
 
+var TaskQuery_2 = __webpack_require__(/*! ../../../queries/TaskQuery */ "./resources/ts/queries/TaskQuery.tsx");
+
 var TaskList = function TaskList() {
   var _a = (0, TaskQuery_1.UseTasks)(),
       tasks = _a.data,
       status = _a.status;
+
+  var updateDoneTasks = (0, TaskQuery_2.UseUpdateDoneTasks)();
 
   if (status === "loading") {
     return react_1["default"].createElement("div", {
@@ -2646,12 +2676,16 @@ var TaskList = function TaskList() {
     className: "task-list"
   }, tasks.map(function (task) {
     return react_1["default"].createElement("li", {
+      className: task.is_done ? "done" : "",
       key: task.id
     }, react_1["default"].createElement("label", {
       className: "checkbox-label"
     }, react_1["default"].createElement("input", {
       type: "checkbox",
-      className: "checkbox-input"
+      className: "checkbox-input",
+      onClick: function onClick() {
+        return updateDoneTasks.mutate(task);
+      }
     })), react_1["default"].createElement("div", null, react_1["default"].createElement("span", null, task.title)), react_1["default"].createElement("button", {
       className: "btn is-delete"
     }, "\u524A\u9664"));
@@ -2751,7 +2785,7 @@ exports.TaskPage = TaskPage;
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.UseTasks = void 0;
+exports.UseUpdateDoneTasks = exports.UseTasks = void 0;
 
 var TaskApi_1 = __webpack_require__(/*! ../api/TaskApi */ "./resources/ts/api/TaskApi.tsx");
 
@@ -2764,6 +2798,17 @@ var UseTasks = function UseTasks() {
 };
 
 exports.UseTasks = UseTasks;
+
+var UseUpdateDoneTasks = function UseUpdateDoneTasks() {
+  var queryClient = (0, react_query_1.useQueryClient)();
+  return (0, react_query_1.useMutation)(TaskApi_1.updateDoneTask, {
+    onSuccess: function onSuccess() {
+      return queryClient.invalidateQueries("tasks");
+    }
+  });
+};
+
+exports.UseUpdateDoneTasks = UseUpdateDoneTasks;
 
 /***/ }),
 
